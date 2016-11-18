@@ -125,7 +125,7 @@ public class PostActivity extends BaseActivity implements View.OnClickListener {
         final String des = mDesField.getText().toString();
         final String loc = spinnerBuilding.getSelectedItem().toString();
         final String cap = "0";
-        final String fromDate = fromDateEtxt.getText().toString();
+        final String date = fromDateEtxt.getText().toString();
         final String fromTime = "0:0";
 
         // Title is required
@@ -162,7 +162,7 @@ public class PostActivity extends BaseActivity implements View.OnClickListener {
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             // Write new post
-                            writeNewPost(userId, user.username, title, des,loc,cap,fromDate,fromTime);
+                            writeNewPost(userId, user.username, title, des,loc,date);
 
                         }
 
@@ -192,11 +192,11 @@ public class PostActivity extends BaseActivity implements View.OnClickListener {
             mSubmitButton.setVisibility(View.GONE);
         }
     }
-    private void writeNewPost(String uid, String author, String title, String desc,String location,String capacity,String fromDate,String fromTime){
+    private void writeNewPost(String uid, String author, String title, String desc,String loc, String date){
         // Create new post at /user-posts/$userid/$postid and at
         // /posts/$postid simultaneously
         String key = mDatabase.child("posts").push().getKey();
-        PostEvent eventinfo = new PostEvent(uid, author, title, desc,location,capacity,fromDate,fromTime, null, null, null);
+        Post eventinfo = new Post(uid, author, title, desc,loc,date);
         Map<String, Object> postValues = eventinfo.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();
@@ -212,7 +212,7 @@ public class PostActivity extends BaseActivity implements View.OnClickListener {
     }
 
     public void post(View view){
-        Intent intent = new Intent(this,MeActivity.class);
+        Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
     }
 

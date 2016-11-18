@@ -77,7 +77,7 @@ public class Frag_login extends Fragment {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()) {
                                 progressDialog.dismiss();
-                                startActivity(new Intent(getActivity(), MeActivity.class));
+                                startActivity(new Intent(getActivity(), MainActivity.class));
                                 //getActivity().finish();
                             } else {
                                 progressDialog.dismiss();
